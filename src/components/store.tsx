@@ -58,11 +58,19 @@ function writeLocal(s: StudyState) {
   }
 }
 
-function getPasscode(): string {
+export function getPasscode(): string {
   try {
     return localStorage.getItem(LS_PASSCODE) ?? "";
   } catch {
     return "";
+  }
+}
+
+export function savePasscode(code: string) {
+  try {
+    localStorage.setItem(LS_PASSCODE, code.trim());
+  } catch {
+    /* ignore */
   }
 }
 

@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useStore, type SyncStatus } from "./store";
-import { IconBooks, IconPlan, IconQuiz, IconSettings, IconTests, IconTimer, IconToday } from "./icons";
+import { IconBooks, IconExam, IconPlan, IconQuiz, IconSettings, IconTests, IconTimer, IconToday } from "./icons";
 import { TimerBadge } from "./TimerBadge";
 
 const NAV = [
   { href: "/", label: "Today", icon: IconToday },
   { href: "/subjects", label: "Subjects", icon: IconBooks },
+  { href: "/exam", label: "Exam", icon: IconExam },
   { href: "/practice", label: "Practice", icon: IconQuiz },
   { href: "/timer", label: "Timer", icon: IconTimer },
   { href: "/planner", label: "Planner", icon: IconPlan },
@@ -60,7 +61,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-dvh md:flex">
       {/* Desktop rail */}
-      <aside className="hidden md:flex md:w-56 md:flex-col md:border-r md:border-line md:bg-surface md:px-3 md:py-5 sticky top-0 h-dvh">
+      <aside className="hidden print:!hidden md:flex md:w-56 md:flex-col md:border-r md:border-line md:bg-surface md:px-3 md:py-5 sticky top-0 h-dvh">
         <Link href="/" className="px-3 pb-6">
           <span className="block font-serif text-2xl font-semibold leading-none">Study Register</span>
           <span className="mt-1 block text-xs text-muted">ICS Part-II, 2026-27</span>
@@ -92,7 +93,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="flex min-w-0 flex-1 flex-col">
         {/* Mobile top bar */}
         <header
-          className="sticky top-0 z-20 flex items-center justify-between gap-3 border-b border-line bg-paper/95 px-4 py-2.5 backdrop-blur md:hidden"
+          className="sticky top-0 z-20 flex items-center justify-between gap-3 border-b border-line bg-paper/95 px-4 py-2.5 backdrop-blur md:hidden print:hidden"
           style={{ paddingTop: "max(0.625rem, env(safe-area-inset-top))" }}
         >
           <Link href="/" className="font-serif text-lg font-semibold">
@@ -107,12 +108,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         </header>
 
-        <main className="mx-auto w-full max-w-5xl flex-1 px-4 pb-28 pt-5 md:px-8 md:pb-12 md:pt-8">{children}</main>
+        <main className="mx-auto w-full max-w-5xl flex-1 px-4 pb-28 pt-5 md:px-8 md:pb-12 md:pt-8 print:p-0">{children}</main>
 
         {/* Mobile tab bar */}
         <nav
           aria-label="Main"
-          className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-6 border-t border-line bg-surface md:hidden"
+          className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-7 border-t border-line bg-surface md:hidden print:hidden"
           style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
         >
           {NAV.map(({ href, label, icon: Icon }) => {
@@ -122,7 +123,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 key={href}
                 href={href}
                 aria-current={active ? "page" : undefined}
-                className={`flex flex-col items-center gap-0.5 py-2 text-[0.68rem] ${
+                className={`flex min-w-0 flex-col items-center gap-0.5 py-2 text-[0.66rem] ${
                   active ? "font-semibold text-accent" : "text-muted"
                 }`}
               >

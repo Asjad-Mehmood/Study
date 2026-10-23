@@ -13,6 +13,7 @@ const KINDS: { id: TestKind; label: string }[] = [
   { id: "monthly", label: "Monthly test" },
   { id: "send-up", label: "Send-up / pre-board" },
   { id: "board", label: "Board exam" },
+  { id: "ai-paper", label: "AI practice paper" },
   { id: "other", label: "Other" },
 ];
 

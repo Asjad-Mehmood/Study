@@ -87,3 +87,16 @@ export const IconBack = (p: P) => (
     <path d="M14.5 5.5L8 12l6.5 6.5" />
   </svg>
 );
+export const IconExam = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M6 3.5h8.5L19 8v12.5H6z" />
+    <path d="M14 3.5V8.5h5" />
+    <path d="M9 12.5h7M9 16h4.5" />
+  </svg>
+);
+export const IconCamera = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M4 8.5A1.5 1.5 0 0 1 5.5 7h2.2l1.5-2.2h5.6L16.3 7h2.2A1.5 1.5 0 0 1 20 8.5v9A1.5 1.5 0 0 1 18.5 19h-13A1.5 1.5 0 0 1 4 17.5z" />
+    <circle cx="12" cy="13" r="3.3" />
+  </svg>
+);

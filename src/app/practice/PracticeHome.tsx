@@ -17,6 +17,14 @@ export function PracticeHome({ counts }: { counts: Record<string, Record<number,
         lead="MCQ quizzes built from your notes. Every attempt is saved so you can see which chapters need another pass."
       />
 
+      <Link
+        href="/exam"
+        className="mb-8 flex flex-col gap-0.5 rounded-xl border border-line bg-surface px-4 py-3 hover:border-accent"
+      >
+        <span className="font-semibold text-accent">Want a full paper with short and long questions?</span>
+        <span className="text-sm text-muted">The exam maker writes a new board-style paper and marks your answers, typed or photographed.</span>
+      </Link>
+
       {SUBJECTS.map((s) => {
         const chapters = s.chapters.filter((c) => counts[s.id]?.[c.n]);
         const total = chapters.reduce((m, c) => m + (counts[s.id][c.n] ?? 0), 0);

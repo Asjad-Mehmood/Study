@@ -1,4 +1,5 @@
 import type { CheckId, SubjectId } from "./syllabus";
+import type { Mark, Paper } from "./exam";
 
 /** Every stored record carries an id and a last-change time, so two devices can be merged safely. */
 export type Base = { id: string; updatedAt: number; deleted?: boolean };
@@ -32,7 +33,7 @@ export type Task = Base & {
   createdAt: number;
 };
 
-export type TestKind = "class-test" | "monthly" | "send-up" | "board" | "other";
+export type TestKind = "class-test" | "monthly" | "send-up" | "board" | "ai-paper" | "other";
 
 export type TestRecord = Base & {
   subject: SubjectId;
@@ -54,6 +55,26 @@ export type QuizAttempt = Base & {
   wrong: number[];
 };
 
+export type ExamStatus = "ready" | "in-progress" | "marking" | "marked";
+
+/** A paper made by the exam maker, with the student's answers and the marks. */
+export type ExamRecord = Base & {
+  subject: SubjectId;
+  title: string;
+  createdAt: number;
+  /** Removed from old exams to keep the saved data small; the score stays. */
+  paper?: Paper;
+  status: ExamStatus;
+  answers: Record<string, string>;
+  marks: Record<string, Mark>;
+  startedAt?: number;
+  submittedAt?: number;
+  score?: number;
+  total: number;
+  testId?: string;
+  photos?: number;
+};
+
 export type Settings = Base & {
   name: string;
   examDate?: string; // YYYY-MM-DD
@@ -68,13 +89,14 @@ export type StudyState = {
   tests: Record<string, TestRecord>;
   quizzes: Record<string, QuizAttempt>;
   settings: Record<string, Settings>;
+  exams: Record<string, ExamRecord>;
 };
 
-export const COLLECTIONS = ["progress", "sessions", "tasks", "tests", "quizzes", "settings"] as const;
+export const COLLECTIONS = ["progress", "sessions", "tasks", "tests", "quizzes", "settings", "exams"] as const;
 export type CollectionName = (typeof COLLECTIONS)[number];
 
 export function emptyState(): StudyState {
-  return { v: 1, progress: {}, sessions: {}, tasks: {}, tests: {}, quizzes: {}, settings: {} };
+  return { v: 1, progress: {}, sessions: {}, tasks: {}, tests: {}, quizzes: {}, settings: {}, exams: {} };
 }
 
 export const DEFAULT_SETTINGS: Settings = {
