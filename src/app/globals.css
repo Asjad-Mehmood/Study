@@ -1,0 +1,249 @@
+@import "tailwindcss";
+
+/* Study register: cool paper, ink-blue for actions, green for finished work,
+   red-pen for what still needs attention. */
+:root {
+  --paper: #f4f6f3;
+  --surface: #ffffff;
+  --sunk: #eceff0;
+  --ink: #1c2630;
+  --muted: #5b6871;
+  --line: #d8dee1;
+  --accent: #2340a0;
+  --accent-ink: #ffffff;
+  --done: #1e7a4e;
+  --mark: #b9382f;
+  --warn: #9a6a00;
+
+  --c-physics: #2f5bd3;
+  --c-maths: #b4521f;
+  --c-cs: #0e8a7e;
+  --c-english: #7a4bc2;
+  --c-urdu: #1e7a4e;
+  --c-pak: #a23b72;
+
+  --s-none: #e3e8ea;
+  --s-reading: #f2c94c;
+  --s-revising: #6fa0f0;
+  --s-done: #1e7a4e;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #10151a;
+    --surface: #171e25;
+    --sunk: #1d252d;
+    --ink: #e5ebee;
+    --muted: #94a2ab;
+    --line: #2b353e;
+    --accent: #9db2ff;
+    --accent-ink: #0f1830;
+    --done: #5cc48e;
+    --mark: #f0857a;
+    --warn: #e6b54a;
+
+    --c-physics: #7d9cf0;
+    --c-maths: #e58c5c;
+    --c-cs: #4cc3b6;
+    --c-english: #b494ec;
+    --c-urdu: #5cc48e;
+    --c-pak: #e07bb0;
+
+    --s-none: #26313a;
+    --s-reading: #b8952f;
+    --s-revising: #4b74c4;
+    --s-done: #3f9e6c;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-sunk: var(--sunk);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-done: var(--done);
+  --color-mark: var(--mark);
+  --color-warn: var(--warn);
+  --font-sans: var(--font-ui), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: var(--font-read), Georgia, "Times New Roman", serif;
+  --font-urdu: var(--font-nastaliq), "Jameel Noori Nastaleeq", "Noto Naskh Arabic", serif;
+}
+
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.urdu {
+  font-family: var(--font-urdu);
+  direction: rtl;
+  line-height: 2.1;
+}
+
+/* Form controls */
+.input {
+  width: 100%;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 0;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 8px;
+  padding: 0.55rem 0.95rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.btn-primary:hover {
+  filter: brightness(1.08);
+}
+.btn-quiet {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink);
+}
+.btn-quiet:hover {
+  background: var(--sunk);
+}
+.btn-danger {
+  background: transparent;
+  color: var(--mark);
+  border-color: color-mix(in oklab, var(--mark) 35%, transparent);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Reading notes */
+.notes {
+  font-family: var(--font-serif);
+  font-size: 1.06rem;
+  line-height: 1.72;
+  max-width: 70ch;
+}
+.notes h3 {
+  font-family: var(--font-sans);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 2.4rem 0 0.8rem;
+  padding-top: 0.6rem;
+  border-top: 2px solid var(--line);
+  scroll-margin-top: 5rem;
+}
+.notes p {
+  margin: 0.75rem 0;
+}
+.notes strong {
+  font-weight: 700;
+}
+.notes ul,
+.notes ol {
+  margin: 0.6rem 0 0.9rem;
+  padding-left: 1.4rem;
+}
+.notes ul {
+  list-style: disc;
+}
+.notes ol {
+  list-style: decimal;
+}
+.notes li {
+  margin: 0.3rem 0;
+}
+.notes li > ul,
+.notes li > ol {
+  margin: 0.2rem 0;
+}
+.notes .table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.notes table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.notes th,
+.notes td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.5rem 0.7rem;
+  border-bottom: 1px solid var(--line);
+}
+.notes th {
+  background: var(--sunk);
+  font-weight: 700;
+}
+.notes tr:last-child td {
+  border-bottom: 0;
+}
+.notes .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.4rem 0;
+  margin: 0.8rem 0;
+}
+.notes .katex {
+  font-size: 1.08em;
+}
+.notes code {
+  font-size: 0.9em;
+  background: var(--sunk);
+  padding: 0.05rem 0.3rem;
+  border-radius: 4px;
+}
+.notes a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
